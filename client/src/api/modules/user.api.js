@@ -8,7 +8,7 @@ const userEndpoints = {
 };
 
 const userApi = {
-  getAllUsers: async ({ params }) => {
+  getAllUsers: async (params = {}) => {
     try {
       const response = await publicClient.get(userEndpoints.getAllUsers, {
         params,
@@ -50,8 +50,9 @@ const userApi = {
       return { err };
     }
   },
-  updateUser: async (fields, { userId }) => {
+  updateUser: async ({ fields, userId }) => {
     try {
+      console.log(userId);
       const response = await publicClient.patch(
         userEndpoints.updateUser({ userId }),
         fields

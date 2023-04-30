@@ -4,6 +4,7 @@ import Circle from "../Circle";
 import Car from "../../assets/car2.png";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import { toast } from "react-toastify";
 
 const Home = () => {
   const emailRef = useRef();
@@ -22,9 +23,9 @@ const Home = () => {
       const redirect =
         new URLSearchParams(location.search).get("redirect") || "/search";
       navigate(redirect);
-    } catch (error) {
-      console.log(error.message);
+    } catch (err) {
       setError("Failed to sign in");
+      toast.error(err.message);
     }
     setLoading(false);
   }
@@ -48,7 +49,6 @@ const Home = () => {
           <span>
             Welcome To <br /> <h1>GearUp</h1>
           </span>
-          {error && <p className="error">{error}</p>}
           <form className="form" onSubmit={handleSubmit}>
             <input
               type="text"

@@ -7,6 +7,7 @@ import Circle from '../Circle'
 import car3 from "../../assets/car3.png"
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext'
+import { toast } from 'react-toastify'
 
 const Signup = () => {
     const [open, setOpen] = useState();
@@ -22,7 +23,8 @@ const Signup = () => {
         e.preventDefault();
 
         if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-            return setError('Password do not match');
+            setError('Password do not match');
+            toast(error);
         }
 
         try{
@@ -31,9 +33,9 @@ const Signup = () => {
             await signup(emailRef.current.value , passwordRef.current.value);
             update(userNameRef.current.value);
             navigate("/search");
+            toast.success("Successfully signed in")
         } catch (error){
-            console.log(error.message);
-            setError('Failed to create an account');
+            toast(error.message);
         }
         setLoading(false);
     }
@@ -50,9 +52,16 @@ const Signup = () => {
                 <h1>Welcome</h1>
                 <p>Let's get you started</p>
                 <div className='google'>
-                    <span onClick={() => signInPopup().then((result) => {
-                        navigate('/search');
-                    })}>
+                    <span onClick={async () => {
+                        await signInPopup()
+                        .then((result) => {
+                            navigate('/search');
+                            toast.success("Successfully signed in")
+                        })
+                        .catch((error) => {
+                            toast.error(error.message)
+                        })
+                    }}>
                         <img src={googleLogo} alt="google" />
                         <p>Signup using Google</p>
                     </span>
@@ -72,7 +81,6 @@ const Signup = () => {
                         <img src={emailLogo} alt="email" />
                         <p>Signup with Email/password</p>
                     </span>
-                    {error && <p className='error'>{error}</p>}
                     <form onSubmit={handleSubmit}>
                         <input type="text" placeholder='Username' ref = {userNameRef} />
                         <input type="email" placeholder = "Email" required ref = {emailRef} />

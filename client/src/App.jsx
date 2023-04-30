@@ -15,7 +15,7 @@ import Profile from "./components/Profile/Profile";
 import BecomeHost from "./components/BecomeHost/BecomeHost";
 import ConfirmBooking from "./components/ConfirmBooking/ConfirmBooking";
 import AboutUs from "./components/AboutUS/AboutUs";
-import Cars from "./components/Cars/Cars";
+
 const App = () => {
   return (
     <>
