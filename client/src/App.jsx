@@ -14,6 +14,7 @@ import { ToastContainer } from "react-toastify";
 import Profile from "./components/Profile/Profile";
 import BecomeHost from "./components/BecomeHost/BecomeHost";
 import ConfirmBooking from "./components/ConfirmBooking/ConfirmBooking";
+import AboutUs from "./components/AboutUS/AboutUs";
 
 const App = () => {
   return (
@@ -35,6 +36,7 @@ const App = () => {
             <Route path="/signup" Component={Signup} />
             <Route path="/search" Component={Search} />
             <Route path="/becomehost" Component={BecomeHost} />
+            <Route path = "/aboutUs" Component={AboutUs} />
             <Route path="/confirm" Component={ConfirmBooking} />
             <Route
               path="/profile"
