@@ -29,7 +29,7 @@ const MapboxMap = (props) => {
       marker.remove();
       map.remove();
     };
-  }, []);
+  }, [props.center]);
 
   return <div ref={mapContainer} style={{ height: "500px" }} />;
 };
