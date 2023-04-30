@@ -1,0 +1,96 @@
+.main-wrapper {
+  padding: 15px;
+  background-color: white;
+  box-shadow: -2px 3px 15px 0px lightgray;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.main-wrapper .car-image {
+  border-radius: 20px;
+  width: 40%;
+}
+.main-wrapper .car-details {
+  flex: 1;
+  margin: 0px 20px;
+}
+.main-wrapper .car-name {
+  font-weight: bold;
+}
+.main-wrapper #host-contact {
+  margin: 0px 10px;
+  display: flex;
+  align-self: center;
+}
+.main-wrapper #host {
+  display: flex;
+  align-items: center;
+  margin: 5px 0px;
+}
+.main-wrapper #host-contact::before {
+  background-image: url("/src/assets/phone.avif");
+  background-size: contain;
+  width: 20px;
+  margin-right: 5px;
+  height: 20px;
+  display: inline-block;
+  content: "";
+}
+.rating-bar {
+  margin: 15px 0px;
+  display: flex;
+}
+.rating-bar #rating-box {
+  /* padding: 5px 10px; */
+  width: 60px;
+  background-color: #ff8826;
+  align-items: center;
+  justify-content: space-evenly;
+  font-weight: bolder;
+  display: flex;
+  border-radius: 8px;
+  color: #f0f8ff;
+}
+.rating-bar #rating-box img {
+  height: 15px;
+  width: 15px;
+  filter: invert();
+  /* color: #f0f8ff; */
+}
+.rating-bar #rating-info {
+  display: flex;
+  flex-direction: column;
+  margin: 0px 10px;
+}
+.rating-bar #rating-info span {
+  font-size: small;
+  font-weight: bold;
+}
+.car-features {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 15px;
+  flex-direction: row;
+  gap: 8px 20px;
+}
+.car-features .car-feature {
+  /* margin: 0px 10px; */
+  display: flex;
+  align-items: center;
+}
+.car-features .car-feature .icon {
+  margin-right: 5px;
+}
+.car-details .price #cost {
+  font-weight: bold;
+  font-size: x-large;
+}
+.car-details #car-name {
+  display: flex;
+  justify-content: space-between;
+}
+.car-details .price span {
+  font-weight: bold;
+  font-size: x-small;
+}

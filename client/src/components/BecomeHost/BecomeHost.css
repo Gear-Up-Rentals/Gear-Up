@@ -1,0 +1,119 @@
+.becomeHostContainer {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  position: relative;
+  background-color: #fffcf7ff;
+  overflow: hidden;
+}
+
+.becomeHostWrapper {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.becomeHostWrapper1 {
+  width: 70%;
+  height: 80%;
+  border-radius: 30px;
+  z-index: 4;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  align-items: center;
+  justify-content: center;
+}
+
+.becomeHostForm {
+  padding: 20px 0px;
+  width: 100%;
+  gap: 30px;
+  background-color: white;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: column;
+  box-shadow: -2px 3px 15px 0px lightgray;
+  position: relative;
+  z-index: 2;
+}
+
+.becomeHostForm .grid {
+  display: grid;
+  width: 80%;
+  grid-gap: 20px 10px;
+  justify-content: center;
+  grid-template-columns: 1fr 1fr;
+  justify-items: center;
+}
+.becomeHostForm .grid .gridItem {
+  width: 75%;
+}
+.becomeHostForm form {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  flex-direction: column;
+}
+.becomeHostForm form input {
+  height: 40px;
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid black;
+  font-size: 16px;
+  outline: none;
+  color: rgb(130, 130, 130);
+}
+
+.becomeHostForm form .btn {
+  width: 40%;
+  height: 45px;
+  border-radius: 20px;
+  background-color: #feb06eff;
+  border: none;
+  font-size: 16px;
+  color: white;
+  cursor: pointer;
+  margin-bottom: 30px;
+}
+.becomeHostForm form .btn:hover {
+  background-color: rgb(255, 136, 38);
+  border: none;
+}
+.previewImg {
+  height: 40vh;
+}
+.carSelection {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 20px;
+  width: 80%;
+  justify-content: space-around;
+}
+.becomeHostForm .carSelection input {
+  border: 1px solid #f3c9a6;
+}
+.becomeHostForm .carSelection input:focus {
+  outline: 1px solid #f3c9a6;
+  box-shadow: none;
+}
+::-webkit-scrollbar {
+  width: 1rem;
+}
+
+::-webkit-scrollbar-track {
+  background: #ffffff;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(#feb06eff, #ff8826);
+  border-radius: 100vw;
+  border: 1px solid #ffffff;
+}
+::-webkit-scrollbar-track {
+  background: #f3c9a6;
+  border-radius: 100vw;
+}

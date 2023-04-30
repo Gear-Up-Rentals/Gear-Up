@@ -1,0 +1,135 @@
+.signupContainer{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    position: relative;
+    background-color: #FFFCF7ff;
+    overflow: hidden;
+}
+
+.wrapper1{
+    flex: 1;
+}
+
+.wrapper2{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.formContainer{
+    width: 60%;
+    height: 60%;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: -2px 3px 15px 0px lightgray;
+    transform: translateX(-30%);
+    position: relative;
+    overflow: hidden;
+}
+
+.formContainer .overlay{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 40px;
+    background-color: white;
+    border-radius: 20px;
+    transition: 2s all linear;
+}
+
+.formContainer:has(.form) .overlay {
+    display: none;
+}
+
+.google img , .email img{
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+}
+
+.google span , .email span{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.google p , .email p {
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.formContainer .form{
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+}
+
+.form span{
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+.form span img{
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+}
+
+.wrapper2 .form form{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 2vh;
+    flex-direction: column;
+}
+
+
+.form form input{
+    height: 40px;
+    width: 70%;
+    border: none;
+    border-bottom: 1px solid black;
+    font-size: 16px;
+    outline: none;
+    color:rgb(130, 130, 130);
+}
+
+.form form button{
+    width: 40%;
+    height: 45px;
+    border-radius: 20px;
+    background-color: #FEB06Eff;
+    border: none;
+    font-size: 16px;
+    color: white;
+    cursor: pointer;
+}
+
+.form .arrow{
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 3.5vh;
+    left: 2vw;
+    cursor: pointer;
+}
+
+.car3{
+    position: absolute;
+    width: 70vh;
+    height: 70vh;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    z-index: 1;
+}

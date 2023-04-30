@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Quicksand , sans-serif;
+}
+
+a{
+  text-decoration: none;
+  color: unset;
+}
+
+.circle {
+  width: 150vh;
+  height: 150vh;
+  border-radius: 50%;
+  opacity: 1;
+  position: absolute;
+  /* z-index: 999; */
+  /* background-color: green; */
+  margin: auto;
+}
+
+.error{
+  color: darkred;
+  font-size: 14px;
+}
