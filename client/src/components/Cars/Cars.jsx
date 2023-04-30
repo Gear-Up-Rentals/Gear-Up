@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "./Cars.css"
 import blob1 from "../../assets/blob1.svg"
 import blob2 from "../../assets/blob2.svg"
 import car4 from "../../assets/car4.png"
 import { Rating, Star } from "@smastrom/react-rating"
 import { PrintIcon, StarIcon } from "evergreen-ui"
+import Cookies from "js-cookie";
 
 const ratingstyles = {
     itemShapes: Star,
@@ -13,7 +14,12 @@ const ratingstyles = {
   };
 
 const Cars = () => {
+    const searchInfo = JSON.parse(Cookies.get("searchInfo"));
     const [sort , setSort] = useState("ratings");
+
+    useEffect(() => {
+        console.log(searchInfo);
+    })
   return (
     <>
         <div className="blobContainer">

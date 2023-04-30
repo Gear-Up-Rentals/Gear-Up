@@ -10,7 +10,7 @@ import Cookies from "js-cookie";
 
 const Search = () => {
   const [carLocation, setCarLocation] = useState(null);
-  const [coords , setCoords ] = useState([70 , 70]);
+  const [coords , setCoords ] = useState([77.216721, 28.6448]);
   
   const formRef = useRef(null);
   const navigate = useNavigate();
