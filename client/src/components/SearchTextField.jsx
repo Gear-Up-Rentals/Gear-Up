@@ -19,6 +19,7 @@ const SearchTextField = (args) => {
               placeholder={args.placeholder}
               value={inputValue}
               ref={getRef}
+              name={args.name}
               {...getInputProps({
                 onFocus: () => {
                   openMenu();
