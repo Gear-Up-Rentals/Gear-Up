@@ -15,6 +15,7 @@ import Profile from "./components/Profile/Profile";
 import BecomeHost from "./components/BecomeHost/BecomeHost";
 import ConfirmBooking from "./components/ConfirmBooking/ConfirmBooking";
 import AboutUs from "./components/AboutUS/AboutUs";
+import Cars from "./components/Cars/Cars";
 const App = () => {
   return (
     <>
@@ -37,6 +38,7 @@ const App = () => {
             <Route path="/becomehost" Component={BecomeHost} />
             <Route path = "/aboutUs" Component={AboutUs} />
             <Route path="/confirm" Component={ConfirmBooking} />
+            <Route path = "/cars" Component={Cars} />
             <Route
               path="/profile"
               element={
