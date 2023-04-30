@@ -41,7 +41,7 @@ const Search = () => {
             <div className="searchWrapper1">
                 <div className='searchForm'>
                     <h1>Make Your Trip</h1>
-                    <form ref = {formRef}>
+                    <form ref = {formRef} onSubmit={onContinue}>
                         <span>STARTING LOCATION</span>
                         <div>
                         <SearchTextField
@@ -50,14 +50,15 @@ const Search = () => {
                         onChange={onLocationSelect}
                         className="carLocation"
                         name="location"
+                        required = {true}
                         />
                         </div>
                         <span>BEGIN</span>
-                        <input type="datetime-local" name='start-time' />
+                        <input type="datetime-local" name='start-time' required />
                         <span>RETURN</span>
-                        <input type="datetime-local" name='end-time' />
+                        <input type="datetime-local" name='end-time' required />
 
-                        <button onClick={onContinue}>Let's Start</button>
+                        <button type='submit'>Let's Start</button>
                     </form>
                 </div>
             </div>

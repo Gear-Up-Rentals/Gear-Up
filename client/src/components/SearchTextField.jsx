@@ -16,6 +16,7 @@ const SearchTextField = (args) => {
           return (
             <TextInput
               minWidth="100%"
+              required = {args.required}
               placeholder={args.placeholder}
               value={inputValue}
               ref={getRef}

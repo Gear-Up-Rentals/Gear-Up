@@ -2,7 +2,7 @@ import axios from "axios";
 const baseURL = `http://localhost:3000/api/v1/`;
 const publicClient = axios.create({
   baseURL,
-  paramsSerializer: (params) => new URLSearchParams(params).toString(),
+  // paramsSerializer: (params) => new URLSearchParams(params).toString(),
 });
 
 publicClient.interceptors.request.use(async (config) => {
