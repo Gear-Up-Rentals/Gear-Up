@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import "./Search.css"
 import Navbar from '../Navbar/Navbar'
 import Circle from '../Circle'
 
 const Search = () => {
+
   return (
     <div className='searchContainer'>
         <div className="searchWrapper">

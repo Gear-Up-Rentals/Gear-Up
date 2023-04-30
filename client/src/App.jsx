@@ -14,6 +14,7 @@ import { ToastContainer } from "react-toastify";
 import Profile from "./components/Profile/Profile";
 import BecomeHost from "./components/BecomeHost/BecomeHost";
 import ConfirmBooking from "./components/ConfirmBooking/ConfirmBooking";
+
 const App = () => {
   return (
     <>

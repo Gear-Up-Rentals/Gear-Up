@@ -8,7 +8,7 @@ const userEndpoints = {
 };
 
 const userApi = {
-  getAllUsers: async ({ params }) => {
+  getAllUsers: async (params = {}) => {
     try {
       const response = await publicClient.get(userEndpoints.getAllUsers, {
         params,
