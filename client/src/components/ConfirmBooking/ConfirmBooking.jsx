@@ -6,8 +6,24 @@ import CarInfo from "./CarInfo";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import MapboxMap from "../Map";
+import axios from 'axios';
+
 const ConfirmBooking = () => {
   const { currentUser } = useAuth();
+  const PaymentLink= async ()=>{
+    console.log("lsfjsdlkj");
+    try{
+      currentUser.email ? await axios.post('/payment', {
+        headers: {
+          Accept: "application/json",
+        },
+      }).then(()=>{
+        console.log("payment route");
+      }): `/?redirect=${encodeURIComponent(window.location.pathname)}`
+    }catch(err){
+      console.log(err);
+    }
+  }
   return (
     <>
       <div className="confirmBookingContainer">
@@ -70,13 +86,7 @@ const ConfirmBooking = () => {
             <div className="btn-wrapper">
               <Link
                 className="btn-link"
-                to={
-                  currentUser.email
-                    ? "/payment"
-                    : `/?redirect=${encodeURIComponent(
-                        window.location.pathname
-                      )}`
-                }
+                onClick={PaymentLink}
               >
                 <button id="confirm-continue">Continue</button>
               </Link>
