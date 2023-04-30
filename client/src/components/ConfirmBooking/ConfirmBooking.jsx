@@ -12,6 +12,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";
 import { useParams } from "react-router-dom";
+import PaymentApi from "../../api/modules/payment_info";
 
 const ConfirmBooking = () => {
   const { currentUser, getMongoUser } = useAuth();
@@ -50,24 +51,12 @@ const ConfirmBooking = () => {
     getMyUser();
   }, []);
 
-  const PaymentLink = async () => {
-    console.log("lsfjsdlkj");
-    try {
-      currentUser.email
-        ? await axios
-            .post("/payment", {
-              headers: {
-                Accept: "application/json",
-              },
-            })
-            .then(() => {
-              console.log("payment route");
-            })
-        : `/?redirect=${encodeURIComponent(window.location.pathname)}`;
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  const submitHandler = async (e)=>{
+    e.preventDefault();
+    const {response, err}= await PaymentApi.createPayment();
+    window.location.href=response;
+  }
+
   return (
     <>
       <div className="confirmBookingContainer">
@@ -161,7 +150,7 @@ const ConfirmBooking = () => {
               </div>
             </div>
             <div className="btn-wrapper">
-              <Link className="btn-link" onClick={PaymentLink}>
+              <Link className="btn-link" onClick={submitHandler}>
                 <button id="confirm-continue">Continue</button>
               </Link>
             </div>
