@@ -13,6 +13,7 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import { ToastContainer } from "react-toastify";
 import Profile from "./components/Profile/Profile";
 import BecomeHost from "./components/BecomeHost/BecomeHost";
+import Cars from "./components/Cars/Cars";
 import ConfirmBooking from "./components/ConfirmBooking/ConfirmBooking";
 import AboutUs from "./components/AboutUS/AboutUs";
 
