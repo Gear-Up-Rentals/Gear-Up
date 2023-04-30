@@ -30,7 +30,7 @@ const App = () => {
           pauseOnHover
         />
         <Router>
-          <Navbar />
+        <Navbar />
           <Routes>
             <Route exact path="/" Component={Home} />
             <Route path="/signup" Component={Signup} />
