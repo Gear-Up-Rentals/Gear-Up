@@ -75,12 +75,12 @@
     cursor: pointer;
     font-weight: bold;
 }
-.carsWrapper2>span p:hover{
+.carsWrapper2>span p.active , .carsWrapper2>span p:hover{
     color: white;
     
 }
 .carInfo{
-    width: 60%;
+    /* width: 60%; */
     padding: 10px;
     display: flex;
     gap: 40px;
@@ -118,7 +118,7 @@
 }
 
 .filters{
-    width: 80%;
+    width: 90%;
     height: 20%;
     display: flex;
     align-items: center;
@@ -131,9 +131,9 @@
     align-items: center;
     gap: 20px;
 }
-.filters div:nth-child(1) input , .filters div:nth-child(2) input , .filters div:nth-child(3) input , .filters div:nth-child(4) select{
+.filters div:nth-child(1) select , .filters div:nth-child(2) select , .filters div:nth-child(3) input , .filters div:nth-child(4) select{
     height: 40px;
-    width: 100%;
+    width: 80%;
     border: none;
     border-radius: 10px;
     padding: 10px;
@@ -141,7 +141,7 @@
     font-size: 16px;
 }
 
-.filters div:nth-child(1) input , .filters div:nth-child(2) input{
+.filters div:nth-child(1) select , .filters div:nth-child(2) select{
     outline: 2px solid black;
 }
 
@@ -162,6 +162,7 @@
     height: 80%;
     gap: 50px;
     grid-template-columns: repeat(3 , 1fr);
+    grid-template-rows: repeat(2 , 1fr);
 }
 .card{
     display: flex;

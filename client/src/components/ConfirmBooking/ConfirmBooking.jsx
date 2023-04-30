@@ -1,35 +1,79 @@
 import Circle from "../Circle";
-import { React, useEffect } from "react";
+import { React, useEffect, useState } from "react";
 import "./ConfirmBooking.css";
 import { PrintIcon } from "evergreen-ui";
 import CarInfo from "./CarInfo";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import carApi from "../../api/modules/car.api";
 import MapboxMap from "../Map";
-import axios from 'axios';
+import { cities } from "../../consts/appData";
+import axios from "axios";
+import Cookies from "js-cookie";
+import { toast } from "react-toastify";
+import { useParams } from "react-router-dom";
 
 const ConfirmBooking = () => {
-  const { currentUser } = useAuth();
-  const PaymentLink= async ()=>{
+  const { currentUser, getMongoUser } = useAuth();
+  const searchInfo = JSON.parse(Cookies.get("searchInfo"));
+  const startDate = new Date(searchInfo.start_time);
+  const endDate = new Date(searchInfo.end_time);
+  const differenceInMilliseconds = endDate - startDate; // difference in milliseconds
+  const hours = differenceInMilliseconds / (1000 * 60 * 60); // difference in hours
+  const { carId } = useParams();
+  const [carInfo, setCarInfo] = useState(null);
+  const [currentUserInfo, setCurrentUserInfo] = useState(null);
+  const [carLocation, setCarLocation] = useState(null);
+  const getMyUser = async () => {
+    const data = await getMongoUser();
+    if (data.length !== 0) {
+      setCurrentUserInfo(data[0]);
+    }
+  };
+  const getCarInfo = async () => {
+    const { response, err } = await carApi.getCar({
+      carId,
+    });
+
+    if (err) {
+      toast.error(err.message);
+    }
+    if (response) {
+      setCarInfo(response.data);
+      const city = response.data.carLocation;
+      const cityMp = cities.find((el) => el.cityName == city);
+      setCarLocation(cityMp.coord);
+    }
+  };
+  useEffect(() => {
+    getCarInfo();
+    getMyUser();
+  }, []);
+
+  const PaymentLink = async () => {
     console.log("lsfjsdlkj");
-    try{
-      currentUser.email ? await axios.post('/payment', {
-        headers: {
-          Accept: "application/json",
-        },
-      }).then(()=>{
-        console.log("payment route");
-      }): `/?redirect=${encodeURIComponent(window.location.pathname)}`
-    }catch(err){
+    try {
+      currentUser.email
+        ? await axios
+            .post("/payment", {
+              headers: {
+                Accept: "application/json",
+              },
+            })
+            .then(() => {
+              console.log("payment route");
+            })
+        : `/?redirect=${encodeURIComponent(window.location.pathname)}`;
+    } catch (err) {
       console.log(err);
     }
-  }
+  };
   return (
     <>
       <div className="confirmBookingContainer">
         <div className="confirmBookingWrapper1">
           <h1 className="heading">Car Details</h1>
-          <CarInfo />
+          <CarInfo carDetails={carInfo} />
           <div
             style={{
               height: "30px",
@@ -37,7 +81,7 @@ const ConfirmBooking = () => {
           />
 
           <h1 className="heading">Location</h1>
-          <MapboxMap center={[72.877426, 19.07609]} />
+          {carLocation && <MapboxMap center={carLocation} />}
         </div>
         <div className="confirmBookingWrapper2">
           <div className="receipt">
@@ -58,36 +102,66 @@ const ConfirmBooking = () => {
                 <hr className="divider" />
                 <div className="date-time">
                   <span className="title">FROM</span>
-                  <span className="date">30 Apr 2023</span>
-                  <span className="time">3:00 Pm</span>
+                  <span className="date">
+                    {startDate.toLocaleDateString("en-IN", {
+                      day: "numeric",
+                      month: "long",
+                      year: "numeric",
+                    })}
+                  </span>
+                  <span className="time">
+                    {startDate.toLocaleTimeString("en-IN", {
+                      hour: "numeric",
+                      minute: "numeric",
+                      hour12: true,
+                    })}
+                  </span>
                 </div>
                 <hr className="divider" />
-                <span>Price per hour</span>
-                <span>GST</span>
+                <span>Price/Hour</span>
+                <span>Fare</span>
+                <span>GST(18%)</span>
                 <span>Total</span>
               </div>
               {/* values */}
               <div className="values">
-                <span>LIGMA</span>
-                <span>5 Hours</span>
-                <span>Mumbai</span>
+                <span>
+                  {currentUserInfo ? `${currentUserInfo.name}` : "UNKNOWN"}
+                </span>
+                <span>{`${hours} Hours`}</span>
+                <span>{carInfo && carInfo.carLocation}</span>
                 <hr className="divider" />
                 <div className="date-time">
                   <span className="title">TO</span>
-                  <span className="date">2 May 2023</span>
-                  <span className="time">1:00 Pm</span>
+                  <span className="date">
+                    {endDate.toLocaleDateString("en-IN", {
+                      day: "numeric",
+                      month: "long",
+                      year: "numeric",
+                    })}
+                  </span>
+                  <span className="time">
+                    {endDate.toLocaleTimeString("en-IN", {
+                      hour: "numeric",
+                      minute: "numeric",
+                      hour12: true,
+                    })}
+                  </span>
                 </div>
                 <hr className="divider" />
-                <span>Rs 250</span>
-                <span>Rs 225</span>
-                <span id="total-cost">Rs 1475</span>
+                <span>{carInfo && `Rs ${carInfo.hourlyPrice}`}</span>
+                <span>{carInfo && `Rs ${carInfo.hourlyPrice * hours}`}</span>
+                <span>
+                  {" "}
+                  {carInfo && `Rs ${carInfo.hourlyPrice * hours * 0.18} `}
+                </span>
+                <span id="total-cost">
+                  {carInfo && `Rs ${carInfo.hourlyPrice * hours * 1.18} `}
+                </span>
               </div>
             </div>
             <div className="btn-wrapper">
-              <Link
-                className="btn-link"
-                onClick={PaymentLink}
-              >
+              <Link className="btn-link" onClick={PaymentLink}>
                 <button id="confirm-continue">Continue</button>
               </Link>
             </div>

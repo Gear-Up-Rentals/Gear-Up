@@ -42,3 +42,24 @@ export const bodyTypes = [
   "Sports Car",
   "Supercar",
 ];
+
+export const getRatingStr = (rating) => {
+  let ratingString;
+  switch (true) {
+    case rating >= 1 && rating <= 2.4:
+      ratingString = "Poor";
+      break;
+    case rating >= 2.5 && rating <= 3.4:
+      ratingString = "Fair";
+      break;
+    case rating >= 3.5 && rating <= 4.4:
+      ratingString = "Good";
+      break;
+    case rating >= 4.5 && rating <= 5:
+      ratingString = "Excellent";
+      break;
+    default:
+      throw new Error("Invalid rating value");
+  }
+  return ratingString;
+};

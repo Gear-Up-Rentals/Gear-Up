@@ -37,9 +37,9 @@ const App = () => {
             <Route path="/signup" Component={Signup} />
             <Route path="/search" Component={Search} />
             <Route path="/becomehost" Component={BecomeHost} />
-            <Route path = "/aboutUs" Component={AboutUs} />
-            <Route path="/confirm" Component={ConfirmBooking} />
-            <Route path = "/cars" Component={Cars} />
+            <Route path="/aboutUs" Component={AboutUs} />
+            <Route path="/confirm/:carId" Component={ConfirmBooking} />
+            <Route path="/cars" Component={Cars} />
             <Route
               path="/profile"
               element={
