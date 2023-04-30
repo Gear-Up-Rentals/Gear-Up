@@ -12,6 +12,9 @@ const featureRouter = require("./routes/featureRoutes");
 
 const AppError = require("./utils/appError");
 const globalErrorHandler = require("./controllers/errorController");
+const dotenv = require("dotenv");
+dotenv.config({ path: "./.env" });
+const stripe = require('stripe')("sk_test_51N2aUmSEg2pe09duSMZLCi9Woa4OdV93fVdWFR8pYaUF35V3ljN2X8p8PGSRDUDYvuVtDrDrQh6Dui1rtZOnpqGv00X9YIy5yZ");
 
 const app = express();
 
@@ -55,12 +58,40 @@ app.use((req, res, next) => {
   req.requestTime = new Date().toISOString();
   next();
 });
+//stripe payment start
+const YOUR_DOMAIN = 'http://localhost:5173';
+
+app.post('/checkout', async (req, res) => {
+  try {
+    const session = await stripe.checkout.sessions.create({
+      line_items: [
+        {
+          // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
+          price: 'price_1N2anWSEg2pe09duAFECch28',
+          quantity: 1,
+        },
+      ],
+      mode: 'payment',
+      success_url: `${YOUR_DOMAIN}?success=true`,
+      cancel_url: `${YOUR_DOMAIN}?canceled=true`,
+    });
+    console.log(session);
+    res.send(session.url);
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+});
+
+//stripe payment end
 
 //routes (Middlewares too)
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/cars", carRouter);
 app.use("/api/v1/bookings", bookingRouter);
 app.use("/api/v1/features", featureRouter);
+// app.use("/api/v1/pay", paymentRouter);
+// app.use("http://localhost:3000/payment", Payment);
 
 //This will run for all routes that weren't catched by middlewares before
 app.all("*", (req, res, next) => {
