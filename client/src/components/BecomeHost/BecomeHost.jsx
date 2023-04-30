@@ -15,9 +15,17 @@ import {
 import SearchTextField from "../SearchTextField";
 import carInfoApi from "../../api/modules/car_info.api";
 import carApi from "../../api/modules/car.api";
+import { useAuth } from "../../context/AuthContext";
+import userApi from "../../api/modules/user.api";
+
 const BecomeHost = () => {
+  const { uploadPhoto, getMongoUser } = useAuth();
   const formRef = useRef(null);
   const [insuranceCertificate, setInsuranceCertificate] = useState([]);
+  const [makes, setMakes] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const [models, setModels] = useState([]);
   const [pucCertificate, setPucCertificate] = useState([]);
   const [carImages, setCarImages] = useState([]);
   const [previewImg, setPreviewImg] = useState(null);
@@ -30,9 +38,6 @@ const BecomeHost = () => {
   const [selectedFuelType, setSelectedFuelType] = useState(null);
   const [selectedSeats, setSelectedSeats] = useState(null);
   const [selectedBodyType, setSelectedBodyType] = useState(null);
-
-  const [makes, setMakes] = useState([]);
-  const [models, setModels] = useState([]);
 
   const onLocationSelect = (city) => {
     setCarLocation(city);
@@ -117,19 +122,63 @@ const BecomeHost = () => {
     getCarImage();
   }, [selectedModel]);
 
+  // Clear DATA
+  const clearData = () => {
+    formRef.current.reset();
+    setCarImages([]);
+    setInsuranceCertificate([]);
+    setPucCertificate([]);
+    setModels([]);
+    setMakes([]);
+    setPreviewImg(null);
+    setCarLocation(null);
+    setSelectedYear(null);
+    setSelectedMake(null);
+    setSelectedModel(null);
+    setSelectedColor(null);
+    setSelectedTransmission(null);
+    setSelectedFuelType(null);
+    setSelectedSeats(null);
+    setSelectedBodyType(null);
+  };
   // SUBMIT FORM
   const submitFormHandler = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
+
     const formData = new FormData(formRef.current);
     const formMap = {};
     for (let [name, value] of formData.entries()) {
       formMap[name] = value;
     }
 
+    // Get User
+    const user = await getMongoUser();
+    if (user.length == 0) {
+      toast.error("User not logged In.");
+      return;
+    }
+
+    const carImgUrls = [];
+    if (previewImg) {
+      carImgUrls.push(previewImg);
+    }
+    try {
+      await Promise.all(
+        carImages.map(async (carImg) => {
+          const photoUrl = await uploadPhoto(carImg, "carPhoto");
+          carImgUrls.push(photoUrl);
+        })
+      );
+    } catch (err) {
+      toast.error("Failed to Upload Images!");
+      return;
+    }
+    const rating = (Math.random() * 2.5 + 2.5).toFixed(1);
+
     const { response, err } = await carApi.createCar({
-      userId: "644d2ae97a0a9e29c512add0",
-      images: [previewImg],
-      hourlyPrice: 200,
+      userId: user[0]._id,
+      images: carImgUrls,
       fuelType: selectedFuelType,
       color: selectedColor,
       transmission: selectedTransmission,
@@ -138,7 +187,7 @@ const BecomeHost = () => {
       make: selectedMake,
       model: selectedModel,
       bodyType: selectedBodyType,
-      rating: 3.5,
+      rating: rating,
       carLocation: carLocation,
       ...formMap,
     });
@@ -147,9 +196,16 @@ const BecomeHost = () => {
       toast.error(err.message);
     }
     if (response) {
-      console.log(response);
-      formRef.current.reset();
+      const userCars = user[0].cars.map((el) => el._id);
+      userCars.push(response.data._id);
+      await userApi.updateUser({
+        fields: { cars: userCars },
+        userId: user[0]._id,
+      });
+      toast.success("Your Car is Now Registered.");
+      clearData();
     }
+    setIsLoading(false);
   };
 
   return (
@@ -188,7 +244,7 @@ const BecomeHost = () => {
                 </div>
                 <div className="gridItem">
                   <span>RENT/Hour (Rs)</span>
-                  <input type="text" name="rent" />
+                  <input type="text" name="hourlyPrice" />
                 </div>
               </div>
               <FilePicker
@@ -217,55 +273,63 @@ const BecomeHost = () => {
                   items={years}
                   onChange={onYearChange}
                   placeholder="Year"
+                  name="year"
                 />
                 <SearchTextField
                   title="Make"
                   items={makes}
                   onChange={onMakeChange}
                   placeholder="Make"
+                  name="make"
                 />
                 <SearchTextField
                   title="Model"
                   items={models}
                   onChange={onModelChange}
                   placeholder="Model"
+                  name="model"
                 />
                 <SearchTextField
                   title="Transmission"
                   items={transmissions}
                   onChange={onTransmissonChange}
                   placeholder="Transmission"
+                  name="transmission"
                 />
                 <SearchTextField
                   title="Fuel Type"
                   items={fuelTypes}
                   onChange={onFuelTypeChange}
                   placeholder="Fuel Type"
+                  name="fuelType"
                 />
                 <SearchTextField
                   title="No of Seats"
                   items={noOfSeats}
                   onChange={onSeatsChange}
                   placeholder="No of Seats"
+                  name="seats"
                 />
                 <SearchTextField
                   title="Color"
                   items={colors}
                   onChange={onColorChange}
                   placeholder="Color"
+                  name="color"
                 />
                 <SearchTextField
                   title="Body"
                   items={bodyTypes}
                   onChange={onBodyTypeChange}
                   placeholder="Body Type"
+                  name="bodyType"
                 />
               </div>
               {previewImg && (
                 <img src={previewImg} className="previewImg" alt="car-img" />
               )}
               <button onClick={submitFormHandler} className="btn">
-                Submit Form
+                {isLoading ? "Loading..." : "Submit Form"}
               </button>
             </form>
           </div>

@@ -40,6 +40,11 @@ const carApi = {
     bodyType,
     rating,
     carLocation,
+    carNo,
+    chassisNo,
+    rcNo,
+    rent,
+    upi,
   }) => {
     try {
       const response = await publicClient.post(carEndpoints.createCar, {
@@ -55,6 +60,11 @@ const carApi = {
         model,
         bodyType,
         rating,
+        carNo,
+        chassisNo,
+        rcNo,
+        rent,
+        upi,
         carLocation,
       });
       return { response };

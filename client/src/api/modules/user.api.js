@@ -50,8 +50,9 @@ const userApi = {
       return { err };
     }
   },
-  updateUser: async (fields, { userId }) => {
+  updateUser: async ({ fields, userId }) => {
     try {
+      console.log(userId);
       const response = await publicClient.patch(
         userEndpoints.updateUser({ userId }),
         fields
