@@ -19,7 +19,7 @@ const Navbar = () => {
             <Link to="/aboutUs">About GearUp</Link>
           </li>
           <li>
-            <Link to="/contact">Contact Us</Link>
+            <Link to="/search">Find Car</Link>
           </li>
           <li>
             <Link to="/profile" className="user_profile">

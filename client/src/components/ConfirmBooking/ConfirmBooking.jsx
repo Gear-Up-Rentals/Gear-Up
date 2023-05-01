@@ -20,7 +20,7 @@ const ConfirmBooking = () => {
   const startDate = new Date(searchInfo.start_time);
   const endDate = new Date(searchInfo.end_time);
   const differenceInMilliseconds = endDate - startDate; // difference in milliseconds
-  const hours = differenceInMilliseconds / (1000 * 60 * 60); // difference in hours
+  const hours = Math.floor(differenceInMilliseconds / (1000 * 60 * 60)); // difference in hours
   const { carId } = useParams();
   const [carInfo, setCarInfo] = useState(null);
   const [currentUserInfo, setCurrentUserInfo] = useState(null);
