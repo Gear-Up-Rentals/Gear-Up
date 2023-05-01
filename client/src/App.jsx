@@ -17,6 +17,7 @@ import Cars from "./components/Cars/Cars";
 import ConfirmBooking from "./components/ConfirmBooking/ConfirmBooking";
 import AboutUs from "./components/AboutUS/AboutUs";
 import Receipt from "./components/Receipt/Receipt";
+import Contact from "./components/ContactUs/Contact";
 
 const App = () => {
   return (
@@ -42,6 +43,7 @@ const App = () => {
             <Route path="/confirm/:carId" Component={ConfirmBooking} />
             <Route path="/cars" Component={Cars} />
             <Route path="/receipt/:carid" Component={Receipt} />
+            <Route path="/contactUs" Component={Contact} />
             <Route
               path="/profile"
               element={
