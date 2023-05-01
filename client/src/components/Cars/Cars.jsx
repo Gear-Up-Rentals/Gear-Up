@@ -1,63 +1,65 @@
-import React, { useEffect, useState } from 'react'
-import "./Cars.css"
-import blob1 from "../../assets/blob1.svg"
-import blob2 from "../../assets/blob2.svg"
-import car4 from "../../assets/car4.png"
-import { Rating, Star } from "@smastrom/react-rating"
-import { PrintIcon, StarIcon } from "evergreen-ui"
+import React, { useEffect, useState } from "react";
+import "./Cars.css";
+import blob1 from "../../assets/blob1.svg";
+import blob2 from "../../assets/blob2.svg";
+import car4 from "../../assets/car4.png";
+import { Rating, Star } from "@smastrom/react-rating";
+import { PrintIcon, StarIcon } from "evergreen-ui";
 import Cookies from "js-cookie";
-import carApi from '../../api/modules/car.api'
-import { useNavigate } from 'react-router-dom'
+import carApi from "../../api/modules/car.api";
+import { useNavigate } from "react-router-dom";
 const ratingstyles = {
-    itemShapes: Star,
-    activeFillColor: "#ffb700",
-    inactiveFillColor: "grey",
-  };
+  itemShapes: Star,
+  activeFillColor: "#ffb700",
+  inactiveFillColor: "grey",
+};
 
 const Cars = () => {
-    const searchInfo = JSON.parse(Cookies.get("searchInfo"));
-    const [sortCriteria , setSortCriteria] = useState("-rating");
-    const [topData , setTopData ] = useState([]);
-    const [filterData, setFilterData] = useState([]);
-    const [seats , setSeats ] = useState(null);
-    const [transmission , setTransmission ] = useState(null);
-    const [rating, setRating] = useState(null);
-    const [sort, setSort] = useState("hourlyPrice");
-    const navigate = useNavigate();
-    const location = searchInfo.location;
+  const searchInfo = JSON.parse(Cookies.get("searchInfo"));
+  const [sortCriteria, setSortCriteria] = useState("-rating");
+  const [topData, setTopData] = useState([]);
+  const [filterData, setFilterData] = useState([]);
+  const [seats, setSeats] = useState(null);
+  const [transmission, setTransmission] = useState(null);
+  const [rating, setRating] = useState(null);
+  const [sort, setSort] = useState("hourlyPrice");
+  const navigate = useNavigate();
+  const location = searchInfo.location;
 
-    useEffect(() => {
-        async function getData() {
-            const { response , err } = await carApi.getAllCars({ carLocation:location , sort:sortCriteria , limit:4 });
-            setTopData(response.data);
-        }
-        getData();
-    }, [sortCriteria])
+  useEffect(() => {
+    async function getData() {
+      const { response, err } = await carApi.getAllCars({
+        carLocation: location,
+        sort: sortCriteria,
+        limit: 4,
+      });
+      setTopData(response.data);
+    }
+    getData();
+  }, [sortCriteria]);
 
-    useEffect(() => {
-        let query = {
-            carLocation: location
-        }
-        if(seats && seats !== "All") {
-            query["seats"] = seats;
-        }
-        if(transmission && transmission !== "All") {
-            query["transmission"] = transmission;
-        }
-        if(rating) {
-            query["rating[gte]"] = rating;
-        }
-        if(sort) {
-            query["sort"] = sort;
-        }
-        console.log(query);
-        async function getData() {
-            const { response , err } = await carApi.getAllCars(query);
-            setFilterData(response.data);
-            console.log(filterData);
-        }
-        getData();
-    }, [seats , transmission , rating , sort])
+  useEffect(() => {
+    let query = {
+      carLocation: location,
+    };
+    if (seats && seats !== "All") {
+      query["seats"] = seats;
+    }
+    if (transmission && transmission !== "All") {
+      query["transmission"] = transmission;
+    }
+    if (rating) {
+      query["rating[gte]"] = rating;
+    }
+    if (sort) {
+      query["sort"] = sort;
+    }
+    async function getData() {
+      const { response, err } = await carApi.getAllCars(query);
+      setFilterData(response.data);
+    }
+    getData();
+  }, [seats, transmission, rating, sort]);
   return (
     <>
         <div className="blobContainer">
@@ -175,7 +177,7 @@ const Cars = () => {
             </div>
         </div>
     </>
-  )
-}
+  );
+};
 
-export default Cars
+export default Cars;

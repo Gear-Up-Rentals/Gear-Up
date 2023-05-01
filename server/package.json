@@ -23,6 +23,7 @@
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^6.10.0",
     "query-string": "^8.1.0",
+    "stripe": "^12.3.0",
     "validator": "^13.7.0",
     "xss-clean": "^0.1.1"
   }
