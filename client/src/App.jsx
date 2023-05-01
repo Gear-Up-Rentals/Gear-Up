@@ -37,16 +37,18 @@ const App = () => {
             <Route exact path="/" Component={Home} />
             <Route path="/signup" Component={Signup} />
             <Route path="/search" Component={Search} />
-            <Route path="/becomehost" element={
-            <PrivateRoute>
-            <BecomeHost />
-            </PrivateRoute>
-            } 
+            <Route
+              path="/becomehost"
+              element={
+                <PrivateRoute>
+                  <BecomeHost />
+                </PrivateRoute>
+              }
             />
             <Route path="/aboutUs" Component={AboutUs} />
             <Route path="/confirm/:carId" Component={ConfirmBooking} />
             <Route path="/cars" Component={Cars} />
-            <Route path="/receipt/:carid" Component={Receipt} />
+            <Route path="/receipt/:carId" Component={Receipt} />
             <Route
               path="/profile"
               element={

@@ -50,14 +50,20 @@ const ConfirmBooking = () => {
     getCarInfo();
     getMyUser();
   }, []);
-  
-  const submitHandler = async (e)=>{
+
+  const submitHandler = async (e) => {
     e.preventDefault();
-    const {response, err}= await PaymentApi.createPayment(carId);
-    // const response= test(ID)
-    // console.log('response', response)
-    window.location.href=response;
-  }
+    if (currentUser.name === "Guest" || currentUserInfo === null) {
+      toast.error("User Must be Logged In.");
+    }
+    const { response, err } = await PaymentApi.createPayment(carId);
+    if (response) {
+      window.location.href = response;
+    }
+    if (err) {
+      toast.error(err.message);
+    }
+  };
 
   return (
     <>
