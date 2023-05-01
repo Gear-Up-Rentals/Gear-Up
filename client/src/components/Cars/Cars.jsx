@@ -78,7 +78,7 @@ const Cars = () => {
                         <p className={sortCriteria === "hourlyPrice" ? "active" : ""} onClick={() => setSortCriteria("hourlyPrice")}>Hourly Rate</p>
                     </span>
                     { topData.map((el , index) => (
-                    <div className='carInfo' key = {index}>
+                    <div className='carInfo' key = {index} onClick={() => navigate(`/confirm/${el._id}`)}>
                         <img src={el.images[0]} alt="" />
                         <span>
                             <p>{el.make + " " + el.model}</p>
