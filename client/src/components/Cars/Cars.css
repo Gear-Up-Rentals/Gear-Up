@@ -197,8 +197,9 @@
 }
 .card>span{
     padding-left: 20px;
+    padding-right: 50px;
 }
-.card p:nth-child(1){
+.card span>p:nth-child(1){
     font-size: 20px;
     /* color: rgb(171, 171, 171); */
     font-weight: bold;
@@ -207,6 +208,9 @@
 .card p:nth-child(2){
     font-size: 24px;
 
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .carRating-bar {

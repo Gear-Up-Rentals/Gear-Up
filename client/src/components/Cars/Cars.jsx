@@ -149,7 +149,9 @@ const Cars = () => {
                             </div>
                             <span>
                                 <p>{el.make + " " + el.model}</p>
-                                <p>Rs. {el.hourlyPrice}</p>
+                                <p>Rs. {el.hourlyPrice}
+                                <p>Seats : {el.seats}</p>
+                                </p>
                                 <div className="carRating-bar">
                                 <span id="carRating-box">
                                     {el.rating} <StarIcon />
