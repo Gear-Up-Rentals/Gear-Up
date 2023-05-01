@@ -50,10 +50,12 @@ const ConfirmBooking = () => {
     getCarInfo();
     getMyUser();
   }, []);
-
+  
   const submitHandler = async (e)=>{
     e.preventDefault();
-    const {response, err}= await PaymentApi.createPayment();
+    const {response, err}= await PaymentApi.createPayment(carId);
+    // const response= test(ID)
+    // console.log('response', response)
     window.location.href=response;
   }
 

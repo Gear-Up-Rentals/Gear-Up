@@ -1,10 +1,11 @@
 import paymentClient from "../client/payment.client";
 
 const PaymentApi = {
-    createPayment: async () => {
+    createPayment: async (carId) => {
         try {
-            const response = await paymentClient.post("/checkout", {});
-            console.log(response);
+            console.log("this is carid----> ", carId);
+            const response = await paymentClient.post(`/checkout/${carId}`, {});
+            // console.log(response);
             return { response };
         } catch (err) {
             return { err };
