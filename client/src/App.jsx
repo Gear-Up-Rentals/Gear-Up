@@ -16,6 +16,7 @@ import BecomeHost from "./components/BecomeHost/BecomeHost";
 import Cars from "./components/Cars/Cars";
 import ConfirmBooking from "./components/ConfirmBooking/ConfirmBooking";
 import AboutUs from "./components/AboutUS/AboutUs";
+import Receipt from "./components/Receipt/Receipt";
 
 const App = () => {
   return (
@@ -40,6 +41,7 @@ const App = () => {
             <Route path="/aboutUs" Component={AboutUs} />
             <Route path="/confirm/:carId" Component={ConfirmBooking} />
             <Route path="/cars" Component={Cars} />
+            <Route path="/receipt/:carid" Component={Receipt} />
             <Route
               path="/profile"
               element={

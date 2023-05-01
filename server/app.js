@@ -61,21 +61,21 @@ app.use((req, res, next) => {
 //stripe payment start
 const YOUR_DOMAIN = 'http://localhost:5173';
 
-app.post('/checkout', async (req, res) => {
+app.post('/checkout/:id', async (req, res) => {
   try {
+    const carId = req.params.id;
     const session = await stripe.checkout.sessions.create({
       line_items: [
         {
           // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-          price: 'price_1N2anWSEg2pe09duAFECch28',
+          price: 'price_1N2f2pSEg2pe09duS1qPSNJD',
           quantity: 1,
         },
       ],
       mode: 'payment',
-      success_url: `${YOUR_DOMAIN}?success=true`,
+      success_url: `${YOUR_DOMAIN}/receipt/${carId}`,
       cancel_url: `${YOUR_DOMAIN}?canceled=true`,
     });
-    console.log(session);
     res.send(session.url);
   } catch (error) {
     console.log(error);
@@ -90,8 +90,7 @@ app.use("/api/v1/users", userRouter);
 app.use("/api/v1/cars", carRouter);
 app.use("/api/v1/bookings", bookingRouter);
 app.use("/api/v1/features", featureRouter);
-// app.use("/api/v1/pay", paymentRouter);
-// app.use("http://localhost:3000/payment", Payment);
+
 
 //This will run for all routes that weren't catched by middlewares before
 app.all("*", (req, res, next) => {
