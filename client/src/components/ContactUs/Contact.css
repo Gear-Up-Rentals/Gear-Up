@@ -1,0 +1,8 @@
+.searchContainer {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    position: relative;
+    background-color: #fffcf7ff;
+    overflow: hidden;
+  }
