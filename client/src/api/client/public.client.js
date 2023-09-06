@@ -1,5 +1,6 @@
 import axios from "axios";
-const baseURL = `http://localhost:3000/api/v1/`;
+// const baseURL = `http://localhost:3000/api/v1/`;
+const baseURL = `https://gear-up-tau.vercel.app/api/v1/`;
 const publicClient = axios.create({
   baseURL,
   // paramsSerializer: (params) => new URLSearchParams(params).toString(),

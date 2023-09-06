@@ -96,7 +96,7 @@ app.use("/api/v1/features", featureRouter);
 //This will run for all routes that weren't catched by middlewares before
 app.all("*", (req, res, next) => {
   // next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404)); //anything you pass into next will be assumed to be error
-  res.send("Server is RUNNING !!!");
+  res.send("Server is Running !!! ✔️✔️✔️");
 });
 
 //this is an error handling middleware
