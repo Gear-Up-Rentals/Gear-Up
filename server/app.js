@@ -14,7 +14,9 @@ const AppError = require("./utils/appError");
 const globalErrorHandler = require("./controllers/errorController");
 const dotenv = require("dotenv");
 dotenv.config({ path: "./.env" });
-const stripe = require('stripe')("sk_test_51N2aUmSEg2pe09duSMZLCi9Woa4OdV93fVdWFR8pYaUF35V3ljN2X8p8PGSRDUDYvuVtDrDrQh6Dui1rtZOnpqGv00X9YIy5yZ");
+const stripe = require("stripe")(
+  "sk_test_51N2aUmSEg2pe09duSMZLCi9Woa4OdV93fVdWFR8pYaUF35V3ljN2X8p8PGSRDUDYvuVtDrDrQh6Dui1rtZOnpqGv00X9YIy5yZ"
+);
 
 const app = express();
 
@@ -59,20 +61,20 @@ app.use((req, res, next) => {
   next();
 });
 //stripe payment start
-const YOUR_DOMAIN = 'http://localhost:5173';
+const YOUR_DOMAIN = "http://localhost:5173";
 
-app.post('/checkout/:id', async (req, res) => {
+app.post("/checkout/:id", async (req, res) => {
   try {
     const carId = req.params.id;
     const session = await stripe.checkout.sessions.create({
       line_items: [
         {
           // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-          price: 'price_1N2f2pSEg2pe09duS1qPSNJD',
+          price: "price_1N2f2pSEg2pe09duS1qPSNJD",
           quantity: 1,
         },
       ],
-      mode: 'payment',
+      mode: "payment",
       success_url: `${YOUR_DOMAIN}/receipt/${carId}`,
       cancel_url: `${YOUR_DOMAIN}?canceled=true`,
     });
@@ -91,10 +93,10 @@ app.use("/api/v1/cars", carRouter);
 app.use("/api/v1/bookings", bookingRouter);
 app.use("/api/v1/features", featureRouter);
 
-
 //This will run for all routes that weren't catched by middlewares before
 app.all("*", (req, res, next) => {
-  next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404)); //anything you pass into next will be assumed to be error
+  // next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404)); //anything you pass into next will be assumed to be error
+  res.send("Server is RUNNING !!!");
 });
 
 //this is an error handling middleware
