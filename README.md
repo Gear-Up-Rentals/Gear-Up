@@ -5,6 +5,7 @@ TECH - MERN
 Gear Up is a web-based car rental platform designed to provide a convenient and reliable car rental service to clients while offering a safe and profitable way for car owners to rent out their cars.
 <br>
 Link- https://gear-up-frontend.vercel.app/
+The server is live on the link - https://gear-up-tau.vercel.app/
 ## Demo
 For the demo you can click on the above link
 <br>
