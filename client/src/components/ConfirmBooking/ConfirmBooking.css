@@ -1,15 +1,15 @@
 .confirmBookingContainer {
   display: flex;
-
   background-color: #fffcf7ff;
   position: absolute;
+  flex-direction: row;
 }
 
 .circleContainer {
   width: 100vw;
-  height: 100vh;
+  height: 150vh;
   position: relative;
-  overflow-x: hidden;
+  overflow: hidden;
   z-index: 2;
 }
 .confirmBookingWrapper1 {
@@ -74,6 +74,7 @@
   flex: 1;
   gap: 8px;
   flex-direction: column;
+  min-width: 150px;
 }
 .confirmBookingWrapper2 .receipt .receipt-details .terms span {
   color: #acabab;
@@ -85,6 +86,7 @@
   flex: 1;
   align-items: flex-end;
   flex-direction: column;
+  min-width: 150px;
 }
 .confirmBookingWrapper2 .receipt .receipt-details .values span {
   color: #000000;
@@ -144,4 +146,26 @@
 }
 ::-webkit-scrollbar {
   display: none;
+}
+
+@media screen and (max-width: 1200px) {
+  .confirmBookingContainer{
+    display: flex;
+    flex-direction: column;
+    height: 250vh;
+  }
+
+  .confirmBookingWrapper1{
+    margin-bottom: 50px;
+    margin-top: 100px;
+    margin-left: 30px;
+    margin-right: 30px;
+  }
+  .circleContainer{ 
+    height: 200vh;
+  }
+
+  .receipt {
+    height: 95vh;
+  }
 }

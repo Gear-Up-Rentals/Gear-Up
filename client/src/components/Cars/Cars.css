@@ -85,7 +85,7 @@
   color: white;
 }
 .carInfo {
-  /* width: 60%; */
+  width: 60%;
   padding: 10px;
   display: flex;
   gap: 40px;

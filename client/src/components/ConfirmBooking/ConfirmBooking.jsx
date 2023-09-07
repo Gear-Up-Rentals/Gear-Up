@@ -8,7 +8,6 @@ import { useAuth } from "../../context/AuthContext";
 import carApi from "../../api/modules/car.api";
 import MapboxMap from "../Map";
 import { cities } from "../../consts/appData";
-import axios from "axios";
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";
 import { useParams } from "react-router-dom";
@@ -168,7 +167,7 @@ const ConfirmBooking = () => {
       <div className="circleContainer">
         <Circle
           className="circle1"
-          top="0vh"
+          top="50vh"
           left="-100vh"
           backgroundColor="#FEB06Eff"
         />

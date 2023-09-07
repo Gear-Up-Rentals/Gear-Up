@@ -116,7 +116,8 @@ const BecomeHost = () => {
         model: selectedModel.toLowerCase(),
         year: selectedYear,
       });
-      setPreviewImg(url);
+      // setPreviewImg(url);
+      setPreviewImg("https://media.istockphoto.com/id/468686480/photo/modern-generic-car-on-white-background.webp?b=1&s=170667a&w=0&k=20&c=g1yrjmmaNZQ6IL9SRSh3SDgfnRihTRKqIYQmzd-8_ws=");
     };
 
     getCarImage();
