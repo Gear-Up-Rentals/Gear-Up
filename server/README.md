@@ -1,10 +1,14 @@
 Server for GEAR UP CAR RENTALS
 
-SETUP TO RUN THE PROJECT:
-
 Create an .env file with :
 
-<div>DATABASE</div>
-<div>NODE_ENV = production or development,</div>
-<div>MONGODB_PASSWORD, </div>
-<div>PORT </div>
+## Step 1: .env File Configuration
+
+Create a `.env` file in the root directory of your project and add the following variables:
+
+### MONGODB Credentials
+
+- `DATABASE`
+- `NODE_ENV`
+- `MONGODB_PASSWORD`
+- `PORT`
